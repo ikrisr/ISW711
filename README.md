@@ -26,6 +26,7 @@ Proyecto de la Semana 1. Se desarrolló una API básica con **Node.js** y **Expr
 DATABASE_URL=tu_string_de_conexion_mongodb
 
 ## Ejecución
-    ```bash npm start
+    ```bash
+     npm start
 
 
