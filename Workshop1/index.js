@@ -2,12 +2,11 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-
 const routes = require('./routes/routes.js');
 
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
 app.use('/api', routes);
 
 const mongoString = process.env.DATABASE_URL;
