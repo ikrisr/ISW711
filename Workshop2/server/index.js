@@ -1,10 +1,16 @@
+require('dotenv').config(); //se tuvo que instalar el paquete con npm i dotenv
+
 const express = require('express');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const Course = require('./models/course');
 
-mongoose.connect('mongodb://127.0.0.1:27017/utnapi');
+
+const mongoString = process.env.DATABASE_URL;
+
+mongoose.connect(mongoString);
+
 const database = mongoose.connection;
 
 
@@ -54,6 +60,29 @@ app.get('/course', async (req, res) => {
         }
         const data = await Course.findById(req.query.id);
         res.status(200).json(data)
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+ 
+app.delete('/course', async (req, res) => {
+    try{
+        await Course.deleteOne({_id: req.query.id});
+        res.status(200).json({message: 'Course deleted successfully'})
+    }
+    catch(error){
+        res.status(500).json({message: error.message})
+    }
+})
+
+app.put('/course', async (req, res) => {
+    try{
+        const course = await Course.findById(req.query.id);
+        course.name = req.body.name;
+        course.credits = req.body.credits;
+        const courseUpdated = await course.save();
+        res.status(200).json(courseUpdated)
     }
     catch(error){
         res.status(500).json({message: error.message})
