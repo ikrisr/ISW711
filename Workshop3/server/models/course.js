@@ -8,7 +8,13 @@ const courseSchema = new mongoose.Schema({
     credits: {
         required: true,
         type: Number
+    }, 
+    teacherId: {
+        required: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Teacher'
     }
+
 })
 
 module.exports = mongoose.model('Course', courseSchema)

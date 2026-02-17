@@ -1,4 +1,4 @@
-/* ====== Base ====== */
+/* Base*/
 * {
   box-sizing: border-box;
 }
@@ -21,7 +21,7 @@ h1 {
   font-size: 32px;
 }
 
-/* ====== Cards ====== */
+/* Cards */
 .card {
   background: #fff;
   border-radius: 14px;
@@ -48,7 +48,7 @@ h2 {
   color: #6b7280;
 }
 
-/* ====== Form Grid ====== */
+/*  Form Grid  */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -82,7 +82,7 @@ input:focus {
   grid-column: 1 / -1;
 }
 
-/* ====== Buttons ====== */
+/*  Buttons  */
 .buttons {
   display: flex;
   gap: 10px;
@@ -121,7 +121,7 @@ button.danger:hover {
   background: #ffecec;
 }
 
-/* ====== Messages ====== */
+/*  Messages  */
 .msg {
   margin-top: 10px;
   min-height: 18px;
@@ -129,7 +129,7 @@ button.danger:hover {
   color: #374151;
 }
 
-/* ====== Table ====== */
+/*  Table  */
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -188,7 +188,7 @@ button.danger:hover {
   font-weight: 600;
   box-shadow: 0 10px 30px rgba(0,0,0,0.18);
 
-  /* Centro real */
+
   transform: translate(-50%, -50%) scale(0.98);
   opacity: 0;
   pointer-events: none;
@@ -208,3 +208,17 @@ button.danger:hover {
   background: #b91c1c;
 }
 
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #dbe3ee;
+  outline: none;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+select:focus {
+  border-color: #7aa7ff;
+  box-shadow: 0 0 0 4px rgba(122,167,255,0.18);
+}
