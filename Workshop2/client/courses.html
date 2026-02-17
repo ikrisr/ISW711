@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cursos UTN </title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>Cursos</h1>
+
+    <section class="card">
+      <form id="quickForm" class="grid">
+        <label>
+          ID
+          <input id="fId" type="text" readonly/>
+        </label>
+
+        <label>
+          Nombre
+          <input id="fName" type="text" placeholder="Ej: Programación I" />
+        </label>
+
+        <label>
+          Créditos
+          <input id="fCredits" type="number" min="0" step="1" placeholder="Ej: 4" />
+        </label>
+
+        <div class="buttons wide">
+
+          <button type="button" id="btnAdd">Agregar</button>
+          <button type="button" id="btnUpdate" class="secondary">Actualizar</button>
+          <button type="button" id="btnDelete" class="danger">Eliminar</button>
+          <button type="button" id="btnClear" class="secondary">Limpiar</button>
+
+        </div>
+      </form>
+
+      <div id="msg" class="msg"></div>
+    </section>
+
+    <!-- TABLA -->
+    <section class="card">
+      <div class="row">
+        <h2>Tabla de cursos</h2>
+        <span id="count" class="count"></span>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+             <th>ID</th>
+            <th>Nombre</th>
+            <th>Créditos</th>
+           
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+         
+        </tbody>
+      </table>
+
+    </section>
+  </main>
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+    <script src="./js/courses.js"></script>
+
+</body>
+</html>

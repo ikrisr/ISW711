@@ -1,4 +1,4 @@
-require('dotenv').config(); //se tuvo que instalar el paquete con npm i dotenv
+require('dotenv').config(); //load environment variables from .env file
 
 const express = require('express');
 const cors = require("cors");
@@ -66,6 +66,7 @@ app.get('/course', async (req, res) => {
     }
 })
  
+//delete course by id passed as query param
 app.delete('/course', async (req, res) => {
     try{
         await Course.deleteOne({_id: req.query.id});
@@ -75,7 +76,7 @@ app.delete('/course', async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
-
+//update course by id passed as query param and new course data in request body
 app.put('/course', async (req, res) => {
     try{
         const course = await Course.findById(req.query.id);
