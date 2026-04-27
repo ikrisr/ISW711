@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../style.css" />
+
+    <script>
+        const API_BASE = "http://localhost:3001";
+
+        function showJSON(obj) {
+            const el = document.getElementById("result");
+            if (el) {
+                el.textContent = JSON.stringify(obj, null, 2);
+            }
+        }
+
+        async function register(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name")?.value.trim();
+            const lastName = document.getElementById("lastName")?.value.trim();
+            const email = document.getElementById("email")?.value.trim();
+            const password = document.getElementById("password")?.value;
+
+            if (!name || !lastName || !email || !password) {
+                showJSON({ error: "Todos los campos son requeridos." });
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/user`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, lastName, email, password }),
+                });
+
+                const data = await response.json().catch(() => ({}));
+
+                if (!response.ok) {
+                    showJSON({ error: "Error al registrar", status: response.status, ...(data || {}) });
+                    return;
+                }
+
+                showJSON({ message: "Usuario registrado exitosamente. Redirigiendo al login..." });
+                setTimeout(() => { window.location.href = "login.html"; }, 1500);
+
+            } catch (err) {
+                showJSON({ error: "No se pudo conectar a la API", detail: String(err) });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("registerForm");
+            if (form) {
+                form.addEventListener("submit", register);
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Registro de Usuario</h1>
+
+    <form id="registerForm">
+        <label for="name">Nombre</label>
+        <input id="name" type="text" placeholder="Ej: Juan" required />
+
+        <label for="lastName">Apellido</label>
+        <input id="lastName" type="text" placeholder="Ej: Pérez" required />
+
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="tu@email.com" autocomplete="username" required />
+
+        <label for="password">Contraseña</label>
+        <input id="password" type="password" placeholder="********" autocomplete="new-password" required />
+
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <p>¿Ya tenés cuenta? <a href="login.html">Iniciar sesión</a></p>
+
+    <h3>Resultado:</h3>
+    <pre id="result"></pre>
+</body>
+
+</html>

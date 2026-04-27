@@ -1,22 +1,12 @@
 const express = require('express');
-const Course = require('../models/course');
-const Teacher = require('../models/teacher'); 
-
 const router = express.Router();
 
-module.exports = router;
-
+const { authenticateToken } = require('../controllers/auth');
 const coursesController = require('../controllers/courses');
-router.post('/course', coursesController.coursePost);
-router.get('/course', coursesController.courseGet);
-router.delete('/course', coursesController.courseDelete);
-router.put('/course', coursesController.courseUpdate);
 
-const teacherController = require('../controllers/teacher');
-router.post('/teacher', teacherController.teacherPost);
-router.get('/teacher', teacherController.teacherGet);
-router.delete('/teacher', teacherController.teacherDelete);
-router.put('/teacher', teacherController.teacherUpdate);
+router.post('/course', authenticateToken, coursesController.coursePost);
+router.get('/course', authenticateToken, coursesController.courseGet);
+router.delete('/course', authenticateToken, coursesController.courseDelete);
+router.put('/course', authenticateToken, coursesController.courseUpdate);
 
-//const authController = require('../controllers/auth');
-//router.post('/login', authController.login);
+module.exports = router;

@@ -1,13 +1,5 @@
 const API_BASE = "http://localhost:3001";
 
-function getToken() {
-  return sessionStorage.getItem("authToken");
-}
-
-function getAuthHeaders() {
-  return { "Authorization": `Bearer ${getToken()}` };
-}
-
 //Inputs of the course form
 const fId = document.getElementById("fId");
 const fName = document.getElementById("fName");
@@ -70,7 +62,6 @@ function showToast(text, isError = false, ms = 2200) {
 //Process fetch requests and responses, including error handling
 
 async function fetchJson(url, options = {}) {
-  options.headers = { ...getAuthHeaders(), ...(options.headers || {}) };
   const res = await fetch(url, options);
   const text = await res.text();
 
@@ -452,10 +443,6 @@ btnClear.addEventListener("click", () => {
 
 
 document.addEventListener("DOMContentLoaded", async () => {
-  if (!getToken()) {
-    window.location.href = "login.html";
-    return;
-  }
   await loadTeachers();
   await loadCourses();
 });

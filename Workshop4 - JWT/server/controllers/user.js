@@ -1,10 +1,13 @@
+const express = require('express');
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 // Create a user
-const userPost = async (req, res) => {
+const  userPost = async (req, res) => {
   const user = new User({
     name: req.body.name,
-    lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password
   });
@@ -18,5 +21,3 @@ const userPost = async (req, res) => {
     return res.status(400).json({ message: error.message });
   }
 };
-
-module.exports = { userPost };
